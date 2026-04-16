@@ -12,9 +12,8 @@ import (
 func handler(root string, h http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		log.Printf("%s: %s\n", r.RemoteAddr, r.URL.Path)
-		w.Header().Add("Cross-Origin-Embedder-Policy", "require-corp")
+		w.Header().Add("Cross-Origin-Embedder-Policy", "credentialless")
 		w.Header().Add("Cross-Origin-Opener-Policy", "same-origin")
-		w.Header().Add("Cross-Origin-Resource-Policy", "same-origin")
 
 		// SPA fallback: serve index.html for non-file paths
 		path := filepath.Join(root, filepath.Clean(r.URL.Path))
